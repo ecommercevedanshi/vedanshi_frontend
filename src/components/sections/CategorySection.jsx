@@ -13,6 +13,8 @@ const CategorySection = () => {
   const [canScrollRight, setCanScrollRight] = useState(true);
   
   const categories = data?.data || [];
+
+  console.log(categories)
   
   const mainCategories = categories.filter(
     (item) => item.parent === null && item.isActive
@@ -50,17 +52,17 @@ const CategorySection = () => {
 
 
   return (
-    <section className="py-14 bg-bgMain">
+    <section className="py-6 bg-bgMain">
 
       <Container>
 
         {/* HEADER */}
         <div className="mb-10">
-          <h2 className="text-3xl font-semibold text-textPrimary">
+          <h2 className="text-3xl font-semibold text-primary text-center">
             Shop by Category
           </h2>
 
-          <p className="text-textMuted mt-1">
+          <p className="text-textMuted mt-1 text-center">
             Explore curated collections
           </p>
         </div>
@@ -136,7 +138,7 @@ const CategorySection = () => {
                   {/* IMAGE */}
                   <img
                     src={
-                      category.thumb_nail ||
+                      category.thumbnail ||
                       category.thumbnail ||
                       "/placeholder-category.jpg"
                     }

@@ -13,6 +13,7 @@ import { setCredentials } from "./features/auth/authSlice";
 import { useEffect } from "react";
 import CategoryPage from "./pages/category/CategoryPage";
 import ProductListPage from "./pages/products/ProductListPage";
+import ProductCard from "./components/product/ProductCard";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
           />
           <Route path="/product" element={<ProductPage />} />
           <Route path="/products" element={<ProductListPage />} />
+          {/* <Route path={`/product/${slug}`} element={<ProductCard />} /> */}
         </Routes>
       </MainLayout>
       {/* <p className="text-red-500">Welcome to dashboard</p> */}

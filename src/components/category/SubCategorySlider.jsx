@@ -19,7 +19,7 @@ const SubCategorySlider = ({ subCategories }) => {
             <div className="w-[70px] h-[70px] rounded-full overflow-hidden bg-gray-100">
 
               <img
-                src={item.thumb_nail || "/placeholder-category.jpg"}
+                src={item.thumbnail || "/placeholder-category.jpg"}
                 alt={item.name}
                 className="w-full h-full object-cover"
               />

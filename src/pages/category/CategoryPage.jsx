@@ -18,7 +18,9 @@ const CategoryPage = () => {
   const { data: productData, isLoading } =
     useGetProductsByCategoryQuery(slug);
 
-  const categories = categoryData?.data || [];
+    
+    const categories = categoryData?.data || [];
+    console.log(productData)
 
   const subCategories = categories.filter(
     (item) =>

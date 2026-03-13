@@ -1,39 +1,33 @@
+import ProductCard from "./ProductCard";
+
 const ProductGrid = ({ products, isLoading }) => {
 
   if (isLoading) {
-    return <div className="py-20 text-center">Loading...</div>;
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-10">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="h-[360px] bg-white rounded-xl animate-pulse"
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (!products.length) {
+    return (
+      <div className="text-center py-16 text-textMuted">
+        No products found
+      </div>
+    );
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-10">
-
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-10">
       {products.map((product) => (
-        <div
-          key={product._id}
-          className="bg-white border border-borderLight rounded-lg overflow-hidden"
-        >
-
-          <img
-            src={product.thumbnail}
-            alt={product.name}
-            className="w-full h-[260px] object-cover"
-          />
-
-          <div className="p-3">
-
-            <h3 className="text-sm font-medium text-textPrimary">
-              {product.name}
-            </h3>
-
-            <p className="text-primary font-semibold mt-1">
-              ₹{product.price}
-            </p>
-
-          </div>
-
-        </div>
+        <ProductCard key={product._id} product={product} />
       ))}
-
     </div>
   );
 };

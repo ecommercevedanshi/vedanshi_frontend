@@ -4,17 +4,19 @@ import { dummyProducts } from "../../data/dummyProducts";
 
 const ProductListPage = () => {
   return (
-    <div className="bg-bgMain min-h-screen py-10">
+    <div className="bg-bgMain py-10">
 
       <Container>
 
         {/* PAGE TITLE */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-textPrimary">
+        
+        <div className="mb-10">
+          <h2 className="text-3xl font-semibold text-primary text-center">
             Products
-          </h1>
-          <p className="text-textMuted text-sm">
-            Showing {dummyProducts.length} products
+          </h2>
+
+          <p className="text-textMuted mt-1 text-center">
+             Showing our huge products collection
           </p>
         </div>
 

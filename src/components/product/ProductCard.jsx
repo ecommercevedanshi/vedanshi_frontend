@@ -1,66 +1,91 @@
 import { Link } from "react-router-dom";
+import img1 from "../../assets/shirt-Products/image-1.avif";
+import img2 from "../../assets/shirt-Products/image-2.avif";
 
 const ProductCard = ({ product }) => {
 
-  const discount = Math.round(
-    ((product.mrp - product.minPrice) / product.mrp) * 100
-  );
-
-  const image =
+  const primaryImage =
     product.images?.find((img) => img.isPrimary)?.url ||
     product.images?.[0]?.url;
 
+  const secondImage =
+    product.images?.[1]?.url || primaryImage;
+
+  const discountPercent = Math.round(
+    ((product.discountPrice - product.price) / product.discountPrice) * 100
+  );
+
   return (
     <Link
-      to={`/product/${product.slug}`}
-      className="
-      bg-white
-      border border-borderLight
-      rounded-lg
-      overflow-hidden
-      group
-      hover:shadow-lg
-      transition
-      "
+      to={`/product/${product.slug || product._id}`}
+      className="group block"
     >
-      {/* IMAGE */}
-      <div className="h-[260px] overflow-hidden bg-gray-100">
-        <img
-          src={image}
-          alt={product.name}
-          className="
-          w-full h-full object-cover
-          group-hover:scale-105
-          transition duration-300
-          "
-        />
-      </div>
+      <div className="bg-white rounded-xl overflow-hidden border border-borderLight shadow-sm hover:shadow-md transition">
 
-      {/* DETAILS */}
-      <div className="p-3">
+        {/* IMAGE */}
+        <div className="relative h-[320px] overflow-hidden">
 
-        <h3 className="text-sm font-medium text-textPrimary line-clamp-2">
-          {product.name}
-        </h3>
+          <img
+            src={img1 || primaryImage}
+            alt={product.name}
+            className="
+            absolute inset-0
+            w-full h-full object-cover
+            transition-opacity duration-500
+            group-hover:opacity-0
+            "
+          />
 
-        <div className="flex items-center gap-2 mt-2">
+          <img
+            src={img2 || secondImage}
+            alt={product.name}
+            className="
+            absolute inset-0
+            w-full h-full object-cover
+            opacity-0
+            group-hover:opacity-100
+            transition-opacity duration-500
+            "
+          />
 
-          <span className="text-primary font-semibold">
-            ₹{product.minPrice}
-          </span>
+        </div>
 
-          <span className="text-xs line-through text-textMuted">
-            ₹{product.mrp}
-          </span>
+        {/* DETAILS */}
+        <div className="p-4">
 
-          <span className="text-xs text-green-600 font-medium">
-            {discount}% OFF
-          </span>
+          <h3 className="text-sm font-medium text-textPrimary line-clamp-2">
+            {product.name}
+          </h3>
+
+          <div className="flex items-center gap-2 mt-2">
+
+            {/* Discount Price */}
+            <span className="text-primary font-semibold">
+              ₹{product.price}
+            </span>
+
+            {/* MRP */}
+            <span className="text-sm text-textMuted line-through">
+              ₹{product.discountPrice}
+            </span>
+
+            {/* Discount % */}
+            <span className="text-green-600 text-xs font-medium">
+              {discountPercent}% OFF
+            </span>
+
+          </div>
+
+          {/* STOCK */}
+         <div className="text-xs text-textMuted mt-1">
+  {product.totalStock > 0
+    ? `${product.totalStock} in stock`
+    : "Out of stock"}
+</div>
 
         </div>
 
       </div>
-
     </Link>
   );
 };
