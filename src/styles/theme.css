@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:wght@300;400;500;600;700&family=Noto+Rashi+Hebrew:wght@100..900&display=swap");
+
+:root {
+
+  /* ===============================
+     BACKGROUND COLORS
+  =============================== */
+
+  --bg-main: #ffffff;
+  --bg-card: #d6d9e1;
+  --bg-surface: #404652;
+
+  /* ===============================
+     TEXT COLORS
+  =============================== */
+
+  --text-primary: #111111;
+  --text-secondary: #404652;
+  --text-muted: #767e8b;
+
+  /* ===============================
+     BRAND COLORS
+  =============================== */
+
+  --color-primary: #ee7361;
+  --color-primary-hover: #ef8f65;
+
+  /* ===============================
+     BORDER COLORS
+  =============================== */
+
+  --border-light: #e6e8ee;
+  --border-medium: #d6d9e1;
+
+  /* ===============================
+     CARD / UI
+  =============================== */
+
+  --card-bg: #ffffff;
+  --card-soft: #f8f9fc;
+
+  /* ===============================
+     SHADOW
+  =============================== */
+
+  --shadow-soft: 0 2px 8px rgba(0,0,0,0.05);
+
+  --font-stylish: "Dancing Script", cursive;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
