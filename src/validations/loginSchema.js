@@ -1,14 +1,15 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-
   email: z
-    .string()
-    .min(1, "Email is required")
+    .string({
+      required_error: "Email is required",
+      invalid_type_error: "Email is required",
+    })
     .email("Invalid email address"),
 
-  password: z
-    .string()
-    .min(1, "Password is required")
-
+  password: z.string({
+    required_error: "Password is required",
+    invalid_type_error: "Password is required",
+  }),
 });

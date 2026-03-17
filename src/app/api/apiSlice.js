@@ -30,7 +30,8 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "./baseQueryWithReauth";
 
 export const apiSlice = createApi({
-  reducerPath: "api",
+  reducerPath: "userApi",
   baseQuery: baseQueryWithReauth,
-  endpoints: () => ({})
+  tagTypes: ["User", "Auth", "Order", "Cart", "Wishlist"],
+  endpoints: () => ({}),
 });

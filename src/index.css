@@ -1,3 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.typing-text {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid white;
+  width: 0;
+  animation: typing 2s steps(20, end) forwards, blink 0.7s infinite;
+}
+.typing-heading {
+  overflow: hidden;
+  /* white-space: nowrap; */
+  border-right: 3px solid white;
+  display: inline-block;
+  max-width: 0;
+  animation: heading 2s steps(40, end) forwards, blink 0.7s infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 21ch }
+}
+@keyframes heading {
+  from { max-width: 0 }
+  to { max-width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+@font-face {
+  font-family: "BodoniFLF";
+  src: url("/src/assets/fonts/BodoniFLF-Roman.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BodoniFLF";
+  src: url("/src/assets/fonts/BodoniFLF-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide:webkit-scrollbar {
+  display: none;
+}

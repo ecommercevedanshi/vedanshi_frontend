@@ -9,6 +9,7 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ["Category"],
     }),
+  
   }),
 });
 

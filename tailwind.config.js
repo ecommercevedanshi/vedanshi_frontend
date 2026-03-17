@@ -10,6 +10,7 @@ export default {
       colors: {
 
         primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
         primaryHover: "var(--color-primary-hover)",
 
         bgMain: "var(--bg-main)",
@@ -33,5 +34,6 @@ export default {
 
     },
   },
-  plugins: [],
+  // tailwind.config.js
+plugins: [("tailwind-scrollbar-hide")]
 }

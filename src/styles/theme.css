@@ -22,8 +22,10 @@
      BRAND COLORS
   =============================== */
 
-  --color-primary: #ee7361;
-  --color-primary-hover: #ef8f65;
+  --color-primary: #856c8a;
+  --color-primary-hover: #9d84a2;
+
+  --color-secondary: #dc685b;
 
   /* ===============================
      BORDER COLORS
@@ -46,6 +48,7 @@
   --shadow-soft: 0 2px 8px rgba(0,0,0,0.05);
 
   --font-stylish: "Dancing Script", cursive;
+  --font-bodoni: "BodoniFLF", serif;
 }
 
 .scrollbar-hide::-webkit-scrollbar {

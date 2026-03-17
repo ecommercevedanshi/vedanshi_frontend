@@ -1,50 +1,60 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { getAuthFromCookie, updateAccessToken } from "../../utils/authCookies";
+import { setCredentials, logout } from "../../features/auth/authSlice";
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3004/api";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: baseUrl || "http://localhost:3004/api",
-  prepareHeaders: (headers) => {
+  baseUrl,
+  credentials: "include",
+ prepareHeaders: (headers, { getState }) => {
+  let token = getState()?.auth?.user?.token;  // ← "token" not "accessToken"
 
-    const auth = getAuthFromCookie();
-
-    if (auth?.accessToken) {
-      headers.set("authorization", `Bearer ${auth.accessToken}`);
-    }
-
-    return headers;
+  if (!token) {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    token = storedUser?.token;                // ← same here
   }
+
+  if (token) {
+    headers.set("authorization", `Bearer ${token}`);
+  }
+
+  return headers;
+},
 });
 
 export const baseQueryWithReauth = async (args, api, extraOptions) => {
-
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result?.error?.status === 408) {
+  let refreshToken = api.getState()?.userAuth?.user?.refreshToken;
 
-    const auth = getAuthFromCookie();
+  if (!refreshToken) {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    refreshToken = storedUser?.refreshToken;
+  }
 
-    if (!auth?.refreshToken) return result;
+  if (result?.error?.status === 401) {
+    console.log("User access token expired. Attempting refresh...");
 
     const refreshResult = await baseQuery(
       {
-        url: "/user/refresh-token",
+        url: "/user/refreshToken",
         method: "POST",
-        body: { refreshToken: auth.refreshToken }
+        body: { refreshToken },
       },
       api,
       extraOptions
     );
 
-    if (refreshResult?.data) {
-
-      const newToken = refreshResult.data.token;
-
-      updateAccessToken(newToken);
-
-      result = await baseQuery(args, api, extraOptions);
-
+   if (refreshResult?.data) {
+  api.dispatch(
+    setCredentials({
+      ...api.getState().auth.user,
+      token: refreshResult?.data?.data.accessToken, // ← new token from refresh
+    })
+  );
+  result = await baseQuery(args, api, extraOptions);
+} else {
+      api.dispatch(logout());
     }
   }
 
